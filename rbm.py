@@ -106,9 +106,9 @@ class RBM(object):
                 print("Error after {0} epochs is: {1}".format(i+1, self.errors[i]))
             elif i % 10 == 9:
                 print("Error after {0} epochs is: {1}".format(i+1, self.errors[i]))
-        if not os.path.exists('outputs'):
-            os.mkdir('outputs')
-        filename = 'outputs/'+filename
+        if not os.path.exists('recommendations'):
+            os.mkdir('recommendations')
+        filename = 'recommendations/'+filename
         if not os.path.exists(filename):
             os.mkdir(filename)
         np.save(filename+'/w.npy', prv_w)
@@ -134,9 +134,9 @@ class RBM(object):
         W = tf.placeholder(tf.float32, [self.num_vis, self.num_hid])  # Weight Matrix
         v0 = tf.placeholder(tf.float32, [None, self.num_vis])
         
-        prv_w = np.load('outputs/'+filename+'/w.npy')
-        prv_vb = np.load('outputs/'+filename+'/vb.npy')
-        prv_hb = np.load('outputs/'+filename+'/hb.npy')
+        prv_w = np.load('recommendations/'+filename+'/w.npy')
+        prv_vb = np.load('recommendations/'+filename+'/vb.npy')
+        prv_hb = np.load('recommendations/'+filename+'/hb.npy')
         
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -242,8 +242,8 @@ class RBM(object):
         
         # exporting the read and unread books  with scores to csv files
 
-        seen.to_csv('outputs/'+filename+'/seen.csv')
-        sorted_result.to_csv('outputs/'+filename+'/unseen.csv')
+        seen.to_csv('recommendations/'+filename+'/seen.csv')
+        sorted_result.to_csv('recommendations/'+filename+'/unseen.csv')
 #         print('The attractions visited by the user are:')
 #         print(seen)
 #         print('The attractions recommended to the user are:')
