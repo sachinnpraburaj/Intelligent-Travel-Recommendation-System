@@ -244,6 +244,7 @@ class RBM(object):
 
         seen.to_csv(filename+'/user'+user+'_seen.csv')
         sorted_result.to_csv(filename+'/user'+user+'_unseen.csv')
+
 #         print('The attractions visited by the user are:')
 #         print(seen)
 #         print('The attractions recommended to the user are:')
