@@ -226,7 +226,7 @@ class RBM(object):
 
         return unseen_places, seen_places
 
-    def export(self, unseen, seen, filename):
+    def export(self, unseen, seen, filename, user):
         '''
         Function to export the final result for a user into csv format
         '''
@@ -242,8 +242,9 @@ class RBM(object):
         
         # exporting the read and unread books  with scores to csv files
 
-        seen.to_csv('recommendations/'+filename+'/seen.csv')
-        sorted_result.to_csv('recommendations/'+filename+'/unseen.csv')
+        seen.to_csv(filename+'/user'+user+'_seen.csv')
+        sorted_result.to_csv(filename+'/user'+user+'_unseen.csv')
+
 #         print('The attractions visited by the user are:')
 #         print(seen)
 #         print('The attractions recommended to the user are:')
