@@ -50,7 +50,7 @@ class Util(object):
                 temp[book['rbm_att_id']] = book['rating']/5.0
             total.append(temp)
 
-        return total
+        return joined, total
 
     def split_data(self, total_data):
         '''
