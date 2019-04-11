@@ -7,7 +7,7 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import os
 from sklearn import preprocessing
-
+from IPython.display import display
 class RBM(object):
     '''
     Class definition for a simple RBM
@@ -106,9 +106,9 @@ class RBM(object):
                 print("Error after {0} epochs is: {1}".format(i+1, self.errors[i]))
             elif i % 10 == 9:
                 print("Error after {0} epochs is: {1}".format(i+1, self.errors[i]))
-        if not os.path.exists('recommendations'):
-            os.mkdir('recommendations')
-        filename = 'recommendations/'+filename
+        if not os.path.exists('rbm_models'):
+            os.mkdir('rbm_models')
+        filename = 'rbm_models/'+filename
         if not os.path.exists(filename):
             os.mkdir(filename)
         np.save(filename+'/w.npy', prv_w)
@@ -134,9 +134,9 @@ class RBM(object):
         W = tf.placeholder(tf.float32, [self.num_vis, self.num_hid])  # Weight Matrix
         v0 = tf.placeholder(tf.float32, [None, self.num_vis])
         
-        prv_w = np.load('recommendations/'+filename+'/w.npy')
-        prv_vb = np.load('recommendations/'+filename+'/vb.npy')
-        prv_hb = np.load('recommendations/'+filename+'/hb.npy')
+        prv_w = np.load('rbm_models/'+filename+'/w.npy')
+        prv_vb = np.load('rbm_models/'+filename+'/vb.npy')
+        prv_hb = np.load('rbm_models/'+filename+'/hb.npy')
         
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -145,6 +145,7 @@ class RBM(object):
         print("Model restored")
         
         inputUser = [train[user]]
+        
         # Feeding in the User and Reconstructing the input
         hh0 = tf.nn.sigmoid(tf.matmul(v0, W) + hb)
         vv1 = tf.nn.sigmoid(tf.matmul(hh0, tf.transpose(W)) + vb)
@@ -163,10 +164,10 @@ class RBM(object):
 
         """ Recommend User what books he has not read yet """
         # Find the mock user's user_id from the data
-        cur_user_id = ratings.iloc[user]['user_id']
+#         cur_user_id = ratings[ratings['user_id']
 
         # Find all books the mock user has read before
-        visited_places = ratings[ratings['user_id'] == cur_user_id]['attraction_id']
+        visited_places = ratings[ratings['user_id'] == user]['attraction_id']
         visited_places
 
         # converting the pandas series object into a list
@@ -187,19 +188,20 @@ class RBM(object):
         # Find all books the mock user has 'not' read before using the to_read data
         unvisited = attractions[~attractions['attraction_id'].isin(places_id)]['attraction_id']
         unvisited_id = unvisited.tolist()
-
+        
         # extract the ratings of all the unread books from ratings dataframe
         unseen_with_score = ratings[ratings['attraction_id'].isin(unvisited_id)]
 
         # grouping the unread data on book id and taking the mean of the recommendation scores for each book_id
-        grouped_unseen = unseen_with_score.groupby('attraction_id', as_index=False)['Recommendation Score'].mean()
-
+        grouped_unseen = unseen_with_score.groupby('attraction_id', as_index=False)['Recommendation Score'].max()
+        display(grouped_unseen.head())
+        
         # getting the names and authors of the unread books
         unseen_places_names = []
         unseen_places_categories = []
         unseen_places_prices = []
         unseen_places_scores = []
-        for place in grouped_unseen['attraction_id']:
+        for place in grouped_unseen['attraction_id'].tolist():
             unseen_places_names.append(
                 attractions[attractions['attraction_id'] == place]['name'].tolist()[0])
             unseen_places_categories.append(
@@ -211,6 +213,7 @@ class RBM(object):
 
         # creating a data frame for unread books with their names, authors and recommendation scores
         unseen_places = pd.DataFrame({
+            'att_id' : grouped_unseen['attraction_id'].tolist(),
             'att_name': unseen_places_names,
             'att_cat': unseen_places_categories,
             'att_price': unseen_places_prices,
@@ -219,6 +222,7 @@ class RBM(object):
 
         # creating a data frame for read books with the names and authors
         seen_places = pd.DataFrame({
+            'att_id' : places_id,
             'att_name': places_names,
             'att_cat': places_categories,
             'att_price': places_prices
@@ -244,7 +248,6 @@ class RBM(object):
 
         seen.to_csv(filename+'/user'+user+'_seen.csv')
         sorted_result.to_csv(filename+'/user'+user+'_unseen.csv')
-
 #         print('The attractions visited by the user are:')
 #         print(seen)
 #         print('The attractions recommended to the user are:')
