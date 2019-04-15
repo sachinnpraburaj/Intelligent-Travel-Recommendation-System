@@ -57,7 +57,7 @@ For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be re
 ###### [requirements.txt](/requirements.txt)
   -- File to handle dependencies for thus project.
 
-###### [Restaurants (Yelp) Dataset-EDA.ipynb](/Restaurants\ (Yelp)\ Dataset-EDA.ipynb)
+###### [Restaurants (Yelp) Dataset-EDA.ipynb](/Restaurants (Yelp) Dataset-EDA.ipynb)
   -- The notebook that has the code and shows EDA visualizations for Yelp (restaurants) dataset.
 
 ###### [TripAdvisor_Crawler_Parser.ipynb](/TripAdvisor_Crawler_Parser.ipynb)
