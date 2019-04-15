@@ -11,7 +11,7 @@ We have used three different recommender systems (one each for attractions, hote
 2. Matrix Factorization with ALS, a highly scalable and distributed Collaborative Filtering technique for hotels.
 3. Hybrid- A combination of K-Means algorithm for Content Based Filtering and K-Nearest Neighbors for Memory based Collaborative Filtering for restaurants.
 
-Few visualizations for the project were done using python libraries and others have been done using Tableau software. They can be accessed from [EDA](EDA) folder.
+Few visualizations for the project were done using python libraries and others have been done using Tableau software. They can be accessed from [EDA](/EDA) folder.
 
 # Steps for execution:
 For restaurants- Dataset for the project should be downloaded from [Yelp dataset challenge](https://www.yelp.ca/dataset/download) and stored in yelp_dataset folder.
