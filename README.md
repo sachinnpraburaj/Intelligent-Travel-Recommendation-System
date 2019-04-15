@@ -1,110 +1,97 @@
 # ITRS <br />
 Intelligent Travel Recommendation System -  Big Data Project<br />
 <br />
-# FILES <br />
-attractions_crawler.ipynb -  To collect urls of attractions from tripadvisor <br />
-attractions_details_crawler.ipynb - To extract attraction details and reviews on each attraction from collected urls in batches <br />
-combine_batches.ipynb -  To combine the data collected in batches <br />
-attraction_etl.ipynb -  To perform ETL on attraction details and attractions reviews datasets <br />
-
-
-# ARYD - Big Data Programming Project
-Analysis and Recommendation on YELP dataset
 
 # Objective:
-To provide useful insights using YELP dataset for businesses through big data analytics to determine strengths and weaknesses, so that existing owners and future business owners can make decision on new businesses or business expansion. Also to provide recommendation to both business owners and users by extensive analysis on data.
+To provide a tailor made plan consisting of possible places to stay, attractions to visit and restaurants to eat at for the entire duration of travel. We recommend restaurants separately for each meal of the day (breakfast, lunch and dinner) and provide two recommendations per meal per day. We also recommend five possible stay options (hotels) for your travel alongside possible attractions to view. Attractions are recommended based on timing, (i.e) which ones to view during the day and which ones are better off at night. Again we provide two attraction recommendations per timing per day for the entire duration of travel.
 
 # Project Overview:
-The project involves analysis on the dataset, visualization based on analysis and recommendations. Major modules of the project are
-1. Validation of reviews on businesses based on user information.
-2. Classification of positive and negative reviews using Machine Learning techniques.
-3. Recommending location based “buzzwords” to future business owners by analyzing positive reviews and negative reviews for a businesses in a state.
-4. User-specific recommendations using user’s history of availed services. Recommendations are provided based on categories of the services, location of the business, user reviews and user ratings.
+We have used three different recommender systems (one each for attractions, hotels and restaurants).
+1. RBM, a Deep learning technique for Attractions.
+2. Matrix Factorization with ALS, a highly scalable and distributed Collaborative Filtering technique for hotels.
+3. Hybrid- A combination of K-Means algorithm for Content Based Filtering and K-Nearest Neighbors for Memory based Collaborative Filtering for restaurants.
 
-Analysis was done on the dataset to understand correlation between different metrics like - location of business and its success, etc. Analysis on business trends based on location, ratings, category and attributes of the business was performed. Trends of closed businesses was observed using user reviews and ratings.
-
-Few visualizations for the project were done using python libraries and are stored in [visualization](visualization) folder.
-Remaining visualizations were done using tableau and the same can be viewed [here](https://public.tableau.com/shared/ZYQGXPHCP?:display_count=yes). View in full screen for better experience. 
+Few visualizations for the project were done using python libraries and others have been done using Tableau software. They can be accessed from [EDA](EDA) folder.
 
 # Steps for execution:
-Dataset for the project should be downloaded from [Yelp dataset challenge](https://www.yelp.ca/dataset/download) and stored in yelp-dataset folder.
-The codes should be executed in the order specified in [order_of_exec](order_of_exec.txt) file.
+For restaurants- Dataset for the project should be downloaded from [Yelp dataset challenge](https://www.yelp.ca/dataset/download) and stored in yelp_dataset folder.
 
-# Files:
+For hotels- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [tripadvisor_hotel_output](tripadvisor_hotel_output) folder.
 
-###### [business_etl.py](business_etl.py)
-  -- business location - outliers removed using euclidean distance from avg location of businesses in state (Data Cleaning)
+For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [outputs](outputs) folder.
 
-###### [user_etl.py](user_etl.py)
-  -- users's location
-  -- user validation score
+# Files: <br />
+###### [attractions_crawler.ipynb](attractions_crawler.ipynb)
+  --  To collect urls of attractions from tripadvisor.
 
-###### [review_classification.py](review_classification.py)
-  -- classification of reviews (Machine Learning)
+###### [attractions_details_crawler.ipynb](attractions_details_crawler.ipynb)
+  --  To extract attraction details and reviews on each attraction from collected urls in batches
 
-###### [review_etl.py](review_etl.py)
-  -- joined classes to reviews and dropped not so useful columns
+###### [combine_batches.ipynb](combine_batches.ipynb)
+  --  To combine the data collected in batches
 
-###### [user_recomm.py](user_recomm.py)
-  -- location based recommendations
-  -- category based recommendations
-  -- overall recommendations
+###### [attraction_etl.ipynb](attraction_etl.ipynb)
+  --  To perform ETL on attraction details and attractions reviews datasets.
 
-###### [user_analysis.py](user_analysis.py)
-  -- most availed category of business by an user
-  -- average stars given by user for each category
-  -- number of positive and negative reviews given by a user
+###### [attractions_recc.py](attractions_recc.py)
+  -- The core code to provide attraction recommendation using the trained RBM model.
 
-###### [top_reviews.py](top_reviews.py)
-  -- chose top 10 positive and top 10 negative reviews based on validation score for business with maximum reviews
+###### [final_hotel_recc.ipynb](final_hotel_recc.ipynb)
+  -- The final code that integrates ETL on hotels dataset and MF-ALS model output to display hotel recommendations.
 
-###### [business_analysis.py](business_analysis.py)
-  -- average review count and stars by city and category
-  -- average review count and stars by state and category
-  -- business attribute based analysis
-  -- average stars for open and closed businesses
-  -- top 15 business categories
-  -- top 15 business categories - city-wise
-  -- cities with most businesses
-  -- businesses with more 5 star ratings
+###### [get_att_recc.ipynb](get_att_recc.ipynb)
+  -- The final code that integrates ETL on attractions dataset and RBM model output to display attraction recommendations.
 
-###### [restaurant_analysis.py](restaurant_analysis.py)
-  -- top 20 restaurants on yelp (viz)
-  -- restaurants with most funny, cool, useful reviews (viz)
+###### [hotel_etl.ipynb](hotel_etl.ipynb)
+  -- To perform 'Extract Transform Load (ETL)' on hotels dataset that has been scraped from TripAdvisor.
 
-###### [topic_mod_pos.py](topic_mod_pos.py)
-  -- topic modeling using positive reviews for businesses in Pennsylvania
+###### [hotel_recc.py](hotel_recc.py)
+  -- The core code that models MF-ALS and outputs recommendations.
 
-###### [topic_mod_neg.py](topic_mod_neg.py)
-  -- topic modeling using negative reviews for businesses in Ontario
+###### [rbm_training.ipynb](rbm_training.ipynb)
+  -- The code to perform training and tuning of the RBM, deep learning model.
 
-###### [topics.py](topics.py)
-  -- extracted terms and topics from the model saved from topic modeling
+###### [rbm.py](rbm.py)
+  -- The code that loads the best model and outputs recommendations for users.
 
-###### [word_cloud.py](word_cloud.py)
-  -- most frequent words from tips and review for Earl (viz)
-  -- most frequent words from tips and review for Ontario (viz)
-  -- most frequent words from tips and review for top 20 restaurants (viz)
-  -- most frequent words from tips and review for bottom 20 restaurants (viz)
+###### [requirements.txt](requirements.txt)
+  -- File to handle dependencies for thus project.
 
-###### [ngram_word_cloud.py](ngram_word_cloud.py)
-  -- wordcloud NGrams from tips review
-  -- wordcloud NGrams from tips review for Arizona
+###### [Restaurants (Yelp) Dataset-EDA.ipynb]([Restaurants Dataset-EDA.ipynb)
+  -- The notebook that has the code and shows EDA visualizations for Yelp (restaurants) dataset.
 
-###### [converttojson.py](converttojson.py)
-  -- converting parquet ETLed files to JSON format for visualization purposes
+###### [TripAdvisor_Crawler_Parser.ipynb](TripAdvisor_Crawler_Parser.ipynb)
+  -- The notebook performs collection, extraction, cleaning, parsing and obtaining hotel urls, hotel related information, user reviews, user ratings and user related information.
+
+###### [utils.py](utils.py)
+  -- Consists of helper functions for the RBM model.
+
+###### [Hybrid_Recommder.ipynb](Hybrid_Recommder.ipynb)
+  -- The core code for ETL on yelp dataset and hybrid recommender model.
+
 
 # Folders:
 
-###### [yelp-etl](yelp-etl)
-  -- outputs after classification of reviews and etl steps on datasets will be stored
+###### [etl](etl)
+  -- Saved model parameters and model outputs from MF-ALS.
 
-###### [visualization](visualization)
-  -- outputs of all the visualizations will be stored here
-  -- tableau workbook having visualizations on the analysis was stored here
+###### [input-output](input-output)
+  -- contains screenshots of input and output images of ITRS application on the whole.
 
-###### [topic_modelling](topic_modelling)
-  -- all results of topic modelling will be saved here
+###### [outputs](outputs)
+  -- Contains dataset for attractions.
 
-###### [analysis](analysis)
-  -- all results of analysis will be stored here
+###### [tripadvisor_hotel_output](tripadvisor_hotel_output)
+  -- Contains dataset for hotels.
+
+###### [downloads](downloads)
+  -- Contains attraction images downloaded using google_download_images API.
+
+###### [mf_models](mf_models)
+  -- Contains the saved best obtained Matrix Factorization- ALS (MF-ALS) model.
+
+###### [rbm_models](rbm_models)
+  -- Contains saved RBM models, tried out for different parameters.
+
+###### [EDA](analysis)
+  -- all results (visualizations) of Exploratory Data Analysis (EDA) are be stored here.
