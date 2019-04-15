@@ -21,10 +21,10 @@ For hotels- We scraped TripAdvisor to obtain the dataset. Dataset can be read fr
 For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [outputs](outputs) folder.
 
 # Files: <br />
-###### [attractions_crawler.ipynb](attractions_crawler.ipynb)
+###### [attractions_crawler.ipynb](/attractions_crawler.ipynb)
   --  To collect urls of attractions from tripadvisor.
 
-###### [attractions_details_crawler.ipynb](attractions_details_crawler.ipynb)
+###### [attractions_details_crawler.ipynb](/attractions_details_crawler.ipynb)
   --  To extract attraction details and reviews on each attraction from collected urls in batches
 
 ###### [combine_batches.ipynb](combine_batches.ipynb)
