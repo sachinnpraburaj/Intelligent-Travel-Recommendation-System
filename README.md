@@ -16,9 +16,9 @@ Few visualizations for the project were done using python libraries and others h
 # Steps for execution:
 For restaurants- Dataset for the project should be downloaded from [Yelp dataset challenge](https://www.yelp.ca/dataset/download) and stored in yelp_dataset folder.
 
-For hotels- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [tripadvisor_hotel_output](tripadvisor_hotel_output) folder.
+For hotels- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [tripadvisor_hotel_output](/tripadvisor_hotel_output) folder.
 
-For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [outputs](outputs) folder.
+For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be read from [outputs](/outputs) folder.
 
 # Files: <br />
 ###### [attractions_crawler.ipynb](/attractions_crawler.ipynb)
@@ -57,7 +57,7 @@ For attractions- We scraped TripAdvisor to obtain the dataset. Dataset can be re
 ###### [requirements.txt](/requirements.txt)
   -- File to handle dependencies for thus project.
 
-###### [Restaurants (Yelp) Dataset-EDA.ipynb](/Restaurants Dataset-EDA.ipynb)
+###### [Restaurants (Yelp) Dataset-EDA.ipynb](/Restaurants (Yelp) Dataset-EDA.ipynb)
   -- The notebook that has the code and shows EDA visualizations for Yelp (restaurants) dataset.
 
 ###### [TripAdvisor_Crawler_Parser.ipynb](/TripAdvisor_Crawler_Parser.ipynb)
