@@ -82,7 +82,6 @@ isort==4.3.16
 itsdangerous==1.1.0
 jdcal==1.4
 jedi==0.13.3
-Jinja2==2.10
 jmespath==0.9.4
 jsonschema==2.6.0
 jupyter==1.0.0
@@ -160,7 +159,6 @@ pyasn1==0.4.5
 pycodestyle==2.5.0
 pycosat==0.6.3
 pycparser==2.19
-pycrypto==2.6.1
 pycurl==7.43.0.2
 pyflakes==2.1.1
 Pygments==2.3.1
