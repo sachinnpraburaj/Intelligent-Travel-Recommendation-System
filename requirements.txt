@@ -233,7 +233,7 @@ vaderSentiment==3.2.1
 wasabi==0.2.1
 wcwidth==0.1.7
 webencodings==0.5.1
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 widgetsnbextension==3.4.2
 wrapt==1.11.1
 wurlitzer==1.0.2
