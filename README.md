@@ -1,7 +1,7 @@
 # Intelligent Travel Recommendation System <br />
 <br />
 Video demo: https://youtu.be/V635gdcw1h0 <br />
-Project Report: report.pdf <r />
+Project Report: report.pdf <br />
 Poster: poster.pdf
 
 # Objective:
